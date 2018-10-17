@@ -35,3 +35,11 @@ body {
         display: none;
     }
 }
+
+#movieTable {
+    background-color: lightcyan;
+}
+
+#thead {
+    background: cadetblue;
+}
