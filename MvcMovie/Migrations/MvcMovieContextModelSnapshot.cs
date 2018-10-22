@@ -34,9 +34,7 @@ namespace MvcMovie.Migrations
 
                     b.Property<DateTime>("ReleaseDate");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(60);
+                    b.Property<string>("Title");
 
                     b.HasKey("ID");
 
