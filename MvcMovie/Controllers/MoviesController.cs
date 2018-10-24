@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -174,6 +175,16 @@ namespace MvcMovie.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movie.Any(e => e.ID == id);
+        }
+
+        public IActionResult GetFromIMDB(string searchString)
+        {
+            HttpClient client = new HttpClient();
+            
+            string url = "http://www.omdbapi.com/?t=";
+
+            //try returning converted movie object back to create
+            return View(searchString);
         }
     }
 }
