@@ -69,6 +69,15 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
+            var reviewData = from review in _context.Review select review;
+
+            if(id != null)
+            {
+                reviewData = reviewData.Where(x => x.MovieID == id);
+            }
+
+            ViewData["Reviews"] = await reviewData.ToListAsync();
+
             return View(movie);
         }
 

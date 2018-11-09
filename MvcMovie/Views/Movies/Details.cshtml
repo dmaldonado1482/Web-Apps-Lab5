@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    List<Review> reviews = (List<Review>)ViewData["Reviews"];
 }
 
 <h2>Details</h2>
@@ -48,8 +49,19 @@
 </div><br />
 
 <div class="container">
-    <a class="btn btn-lg btn-info" asp-controller="Reviews" asp-action="Create">Write a Review</a>
-</div>
+    <a class="btn btn-lg btn-info" href="/Reviews/Create/@Html.DisplayFor(model => model.ID)?movieTitle=@Html.DisplayFor(model => model.Title)">Write a Review</a>
+</div><br />
+
+<h2>Reviews</h2><hr />
+@foreach (Review review in reviews)
+{
+    <div class="row">
+        <div>
+            <h3>@review.Reviewer</h3>
+            <p>@review.Comment</p>
+        </div>
+    </div><hr />
+}
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |

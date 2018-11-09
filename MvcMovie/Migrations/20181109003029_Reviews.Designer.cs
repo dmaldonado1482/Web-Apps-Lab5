@@ -10,7 +10,7 @@ using MvcMovie.Models;
 namespace MvcMovie.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20181029223355_Reviews")]
+    [Migration("20181109003029_Reviews")]
     partial class Reviews
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,9 @@ namespace MvcMovie.Migrations
 
                     b.Property<string>("Comment");
 
-                    b.Property<string>("Movie");
+                    b.Property<int>("MovieID");
+
+                    b.Property<string>("MovieTitle");
 
                     b.Property<string>("Reviewer");
 

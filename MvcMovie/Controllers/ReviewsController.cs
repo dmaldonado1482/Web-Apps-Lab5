@@ -43,8 +43,14 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Reviews/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id, string movieTitle)
         {
+            if(id == null)
+            {
+                id = 0;
+            }
+            ViewData["thisMovieID"] = id;
+            ViewData["thisMovieTitle"] = movieTitle;
             return View();
         }
 
@@ -53,7 +59,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Reviewer,Comment,Movie")] Review review)
+        public async Task<IActionResult> Create([Bind("Reviewer,Comment,MovieID, MovieTitle")] Review review)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +67,8 @@ namespace MvcMovie.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["thisMovieID"] = review.MovieID;
+            ViewData["thisMovieTitle"] = review.MovieTitle;
             return View(review);
         }
 
@@ -85,7 +93,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Reviewer,Comment,Movie")] Review review)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Reviewer,Comment,MovieID MovieTitle")] Review review)
         {
             if (id != review.ID)
             {
@@ -112,6 +120,8 @@ namespace MvcMovie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["thisMovieID"] = review.MovieID;
+            ViewData["thisMovieTitle"] = review.MovieTitle;
             return View(review);
         }
 
